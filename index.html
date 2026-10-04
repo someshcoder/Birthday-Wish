@@ -6,8 +6,7 @@
 <meta name="theme-color" content="#1b1240">
 <title>Happy Birthday, Khushi 🎂</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,800;1,9..144,500&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=DM+Sans:wght@400;500;700&family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,800;1,9..144,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 /* =========================================================
    1. DESIGN TOKENS
@@ -84,35 +83,205 @@ h2{font-family:var(--serif);font-weight:800;font-size:clamp(32px,6vw,52px);line-
 @keyframes rise{to{transform:translate(36px,-135vh)}}
 @keyframes fall{to{transform:translateY(112vh) rotate(720deg)}}
 
-/* =========================================================
-   5. HERO
-   ========================================================= */
-#home{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;overflow:hidden}
-.orb{position:absolute;border-radius:50%;filter:blur(70px);opacity:.5;z-index:-1;animation:drift 12s ease-in-out infinite alternate}
-.orb.o1{width:340px;height:340px;background:var(--rose);top:8%;left:-6%}
-.orb.o2{width:300px;height:300px;background:var(--violet);bottom:6%;right:-6%;animation-delay:-4s}
-.orb.o3{width:220px;height:220px;background:var(--gold);top:46%;left:52%;opacity:.25;animation-delay:-8s}
-@keyframes drift{to{transform:translate(50px,-40px) scale(1.15)}}
+/* ========== HERO SECTION CSS ========== */
+#hero {
+  min-height: 100vh;
+  max-width: 100%;
+  padding: 95px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 25% 15%, rgba(255,107,157,0.14) 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 85%, rgba(165,94,234,0.12) 0%, transparent 45%),
+    linear-gradient(160deg, #0b0914 0%, #141022 40%, #0f2a4a 100%);
+}
+
+.section-inner {
+  max-width: 1100px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* Badge */
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,107,157,0.12);
+  border: 1px solid rgba(255,107,157,0.38);
+  padding: 10px 26px;
+  border-radius: 50px;
+  font-size: 0.88rem;
+  letter-spacing: 2.8px;
+  color: #ff6b9d;
+  margin-bottom: 28px;
+  animation: fadeInDown 1s ease both;
+}
+
+/* Main Title */
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3.1rem, 9.5vw, 6.2rem);
+  font-weight: 700;
+  line-height: 1.06;
+  margin-bottom: 18px;
+  background: linear-gradient(135deg, #ff6b9d, #ffd700, #a55eea, #ff6b9d);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: fadeInUp 1s ease 0.12s both, gradientShift 5.5s ease infinite;
+}
+
+/* Subtitle */
+.hero-subtitle {
+  font-size: clamp(1.15rem, 3vw, 1.55rem);
+  color: rgba(255,255,255,0.9);
+  margin-bottom: 8px;
+  animation: fadeInUp 1s ease 0.3s both;
+}
+
+/* Date */
+.hero-date {
+  font-size: 1.05rem;
+  color: #f8b500;
+  letter-spacing: 4px;
+  font-weight: 500;
+  margin-bottom: 32px;
+  animation: fadeInUp 1s ease 0.45s both;
+}
+
+/* Pet Names */
+.hero-petnames {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 42px;
+  animation: fadeInUp 1s ease 0.6s both;
+}
+
+.pet-tag {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.13);
+  padding: 10px 22px;
+  border-radius: 30px;
+  font-size: 0.95rem;
+  transition: all 0.35s;
+  cursor: default;
+}
+
+.pet-tag:hover {
+  background: #ff6b9d;
+  border-color: #ff6b9d;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(255,107,157,0.4);
+}
+
+/* Countdown */
+.countdown {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+  animation: fadeInUp 1s ease 0.8s both;
+}
+
+.countdown-item {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 16px 20px;
+  min-width: 82px;
+}
+
+.countdown-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: #ff6b9d;
+  line-height: 1;
+}
+
+.countdown-label {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.62);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  margin-top: 6px;
+}
+
+/* Scroll Hint */
+.scroll-hint {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: bounce 2.2s infinite;
+  color: rgba(255,255,255,0.38);
+  font-size: 0.78rem;
+  letter-spacing: 2.5px;
+  text-align: center;
+}
+
+.scroll-hint span {
+  display: block;
+  font-size: 1.35rem;
+  margin-top: 4px;
+}
+
+/* Floating Particles */
+.particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.35;
+  animation: floatUp linear infinite;
+}
+
+/* ========== KEYFRAME ANIMATIONS ========== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(45px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+  40% { transform: translateX(-50%) translateY(-14px); }
+  60% { transform: translateX(-50%) translateY(-7px); }
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.4; }
+  90% { opacity: 0.4; }
+  100% { transform: translateY(-80px) rotate(720deg); opacity: 0; }
+}
+
 .hb{font-family:var(--script);font-size:clamp(26px,5vw,38px);color:var(--gold)}
-h1{display:flex;font-family:var(--serif);font-weight:800;font-size:clamp(64px,19vw,176px);line-height:1;letter-spacing:-.03em}
-h1 span{display:inline-block;opacity:0;transform:translateY(90px) rotate(-14deg) scale(.4);
-  background:linear-gradient(180deg,#fff 20%,var(--rose));-webkit-background-clip:text;background-clip:text;color:transparent;
-  animation:pop .9s cubic-bezier(.2,1.6,.4,1) forwards, float 4s ease-in-out infinite}
-h1 span:nth-child(1){animation-delay:.3s,1.6s}h1 span:nth-child(2){animation-delay:.45s,1.9s}
-h1 span:nth-child(3){animation-delay:.6s,2.2s}h1 span:nth-child(4){animation-delay:.75s,2.5s}
-h1 span:nth-child(5){animation-delay:.9s,2.8s}h1 span:nth-child(6){animation-delay:1.05s,3.1s}
-@keyframes pop{to{opacity:1;transform:none}}
-@keyframes float{50%{transform:translateY(-8px)}}
-.type{font-family:var(--serif);font-style:italic;font-size:clamp(17px,4.4vw,26px);color:var(--muted);
-  white-space:nowrap;overflow:hidden;width:0;border-right:2px solid var(--gold);
-  animation:typing 2.6s steps(31) 1.7s forwards, caret .7s step-end 1.7s 6}
-@keyframes typing{to{width:31ch;border-color:transparent}}
-@keyframes caret{50%{border-color:transparent}}
-.date{margin-top:18px;display:inline-flex;align-items:center;gap:10px;padding:10px 22px;border-radius:99px;
-  background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.2);opacity:0;animation:fade 1s 4.4s forwards}
-.date b{font-family:var(--serif);font-size:22px;color:var(--gold)}
-@keyframes fade{to{opacity:1}}
-.scroll{position:absolute;bottom:26px;font-size:28px;color:var(--muted);animation:bob 1.8s ease-in-out infinite}
 
 /* =========================================================
    6. QUALITIES MARQUEE
@@ -321,15 +490,42 @@ audio{width:100%;color-scheme:dark}
 </div>
 
 <main>
-  <!-- HERO -->
-  <section id="home">
-    <span class="fl" style="--i:1" aria-hidden="true">🎈</span><span class="fl" style="--i:2" aria-hidden="true">✨</span><span class="fl" style="--i:3" aria-hidden="true">🎂</span><span class="fl" style="--i:4" aria-hidden="true">💖</span><span class="fl" style="--i:5" aria-hidden="true">🎁</span><span class="fl" style="--i:6" aria-hidden="true">🌟</span>
-    <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
-    <p class="hb">🎉 Happy Birthday 🎉</p>
-    <h1 aria-label="Khushi"><span>K</span><span>h</span><span>u</span><span>s</span><span>h</span><span>i</span></h1>
-    <p class="type">Today the world celebrates you.</p>
-    <div class="date"><span aria-hidden="true">🎂</span><b>October 5</b></div>
-    <div class="scroll" aria-hidden="true">⌄</div>
+  <!-- ========== HERO SECTION HTML ========== -->
+  <section id="hero">
+    <div class="particles" id="heroParticles"></div>
+    <div class="section-inner">
+      <div class="hero-badge">✨ 5 OCTOBER • SPECIAL DAY ✨</div>
+      <h1 class="hero-title">Happy Birthday<br>Khushi</h1>
+      <p class="hero-subtitle">To the most special girl in my world</p>
+      <p class="hero-date">CELEBRATING YOU TODAY & ALWAYS</p>
+
+      <div class="hero-petnames">
+        <span class="pet-tag">💕 Betu</span>
+        <span class="pet-tag">🌸 Butki</span>
+        <span class="pet-tag">🐣 Baccha</span>
+        <span class="pet-tag">🦋 Bestfriend</span>
+      </div>
+
+      <div class="countdown" id="countdown">
+        <div class="countdown-item">
+          <div class="countdown-num" id="cd-days">0</div>
+          <div class="countdown-label">Days</div>
+        </div>
+        <div class="countdown-item">
+          <div class="countdown-num" id="cd-hours">0</div>
+          <div class="countdown-label">Hours</div>
+        </div>
+        <div class="countdown-item">
+          <div class="countdown-num" id="cd-mins">0</div>
+          <div class="countdown-label">Mins</div>
+        </div>
+        <div class="countdown-item">
+          <div class="countdown-num" id="cd-secs">0</div>
+          <div class="countdown-label">Secs</div>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-hint">SCROLL TO BEGIN <span>↓</span></div>
   </section>
 
   <!-- MARQUEE -->
@@ -388,12 +584,12 @@ audio{width:100%;color-scheme:dark}
       <p class="lead">Moments that stay with me. Tap a photo to view it larger.</p>
     </div>
     <div class="grid rv">
-      <a class="pol" href="#p1"><div class="ph" style="--img:url(photo1.jpg)">📷</div><span>Our first trip</span></a>
-      <a class="pol" href="#p2"><div class="ph" style="--img:url(photo2.jpg)">📷</div><span>Pure fun</span></a>
-      <a class="pol" href="#p3"><div class="ph" style="--img:url(photo3.jpg)">📷</div><span>Best selfie ever</span></a>
-      <a class="pol" href="#p4"><div class="ph" style="--img:url(photo4.jpg)">📷</div><span>One crazy day</span></a>
-      <a class="pol" href="#p5"><div class="ph" style="--img:url(photo5.jpg)">📷</div><span>Unforgettable</span></a>
-      <a class="pol" href="#p6"><div class="ph" style="--img:url(photo6.jpg)">📷</div><span>You and me</span></a>
+      <a class="pol" href="#p1"><div class="ph" style="--img:url(photo1.jpg)"></div></a>
+      <a class="pol" href="#p2"><div class="ph" style="--img:url(photo2.jpg)"></div></a>
+      <a class="pol" href="#p3"><div class="ph" style="--img:url(photo3.jpg)"></div></a>
+      <a class="pol" href="#p4"><div class="ph" style="--img:url(photo4.jpg)"></div></a>
+      <a class="pol" href="#p5"><div class="ph" style="--img:url(photo5.jpg)"></div></a>
+      <a class="pol" href="#p6"><div class="ph" style="--img:url(photo6.jpeg)"></div></a>
     </div>
   </section>
 
@@ -527,7 +723,7 @@ audio{width:100%;color-scheme:dark}
 <div class="lb" id="p6">
   <a class="bg" href="#memories" aria-label="Close"></a>
   <a class="x" href="#memories" aria-label="Close">✕</a>
-  <div class="big" style="--img:url(photo6.jpg)"></div>
+  <div class="big" style="--img:url(photo6.jpeg)"></div>
   <p>You and me</p>
 </div>
 
@@ -538,5 +734,78 @@ audio{width:100%;color-scheme:dark}
     <code>// built with love, not just code 💻❤️</code>
   </div>
 </footer>
+
+<script>
+  // Hero Floating Particles
+  (function initHeroParticles() {
+    const container = document.getElementById('heroParticles');
+    if (!container) return;
+    const colors = ['#ff6b9d', '#ffd700', '#a55eea', '#7ce0c3', '#ffffff', '#ff9a9e'];
+    for (let i = 0; i < 35; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      const size = Math.random() * 8 + 4;
+      p.style.width = size + 'px';
+      p.style.height = size + 'px';
+      p.style.left = (Math.random() * 100) + '%';
+      p.style.bottom = '-30px';
+      p.style.background = colors[Math.floor(Math.random() * colors.length)];
+      p.style.animationDuration = (Math.random() * 7 + 5) + 's';
+      p.style.animationDelay = (Math.random() * 6) + 's';
+      p.style.opacity = (Math.random() * 0.4 + 0.25).toString();
+      container.appendChild(p);
+    }
+  })();
+
+  // Birthday Countdown
+  (function initCountdown() {
+    const daysEl = document.getElementById('cd-days');
+    const hoursEl = document.getElementById('cd-hours');
+    const minsEl = document.getElementById('cd-mins');
+    const secsEl = document.getElementById('cd-secs');
+    if (!daysEl || !hoursEl || !minsEl || !secsEl) return;
+
+    function updateCountdown() {
+      const now = new Date();
+      let targetYear = now.getFullYear();
+      let targetDate = new Date(targetYear, 9, 5, 0, 0, 0); // October 5th (0-indexed month)
+      const endOfBirthday = new Date(targetYear, 9, 5, 23, 59, 59);
+
+      if (now > endOfBirthday) {
+        targetDate = new Date(targetYear + 1, 9, 5, 0, 0, 0);
+      }
+
+      const diff = targetDate - now;
+
+      if (diff <= 0 && now <= endOfBirthday) {
+        daysEl.textContent = '🎉';
+        hoursEl.textContent = '🎂';
+        minsEl.textContent = '✨';
+        secsEl.textContent = '💖';
+        const labels = document.querySelectorAll('.countdown-label');
+        if (labels.length === 4) {
+          labels[0].textContent = "Today";
+          labels[1].textContent = "Is The";
+          labels[2].textContent = "Special";
+          labels[3].textContent = "Day!";
+        }
+        return;
+      }
+
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const m = Math.floor((diff / (1000 * 60)) % 60);
+      const s = Math.floor((diff / 1000) % 60);
+
+      daysEl.textContent = String(d).padStart(2, '0');
+      hoursEl.textContent = String(h).padStart(2, '0');
+      minsEl.textContent = String(m).padStart(2, '0');
+      secsEl.textContent = String(s).padStart(2, '0');
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  })();
+</script>
 </body>
 </html>
