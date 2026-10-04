@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#1b1240">
+<title>Happy Birthday, Khushi 🎂</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,800;1,9..144,500&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   1. DESIGN TOKENS
+   ========================================================= */
+:root{
+  --night:#1b1240; --plum:#2d1b5e; --dusk:#4a2270;
+  --ink:#fff6ee; --muted:#d9c9f5;
+  --rose:#ff8fab; --gold:#ffc857; --mint:#7ce0c3; --violet:#c77dff; --sky:#6ec6ff;
+  --paper:#fff6ee; --paper-ink:#2a0f47;
+  --serif:'Fraunces',Georgia,serif; --sans:'DM Sans',system-ui,sans-serif; --script:'Caveat',cursive;
+  --radius:22px; --shadow:0 18px 40px rgba(0,0,0,.4);
+}
+
+/* =========================================================
+   2. BASE
+   ========================================================= */
+*,*::before,*::after{box-sizing:border-box}
+*{margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:0}
+body{font-family:var(--sans);color:var(--ink);line-height:1.6;overflow-x:hidden;
+  background:linear-gradient(180deg,var(--night),var(--plum) 55%,var(--dusk))}
+a{color:inherit;text-decoration:none}
+.chk{position:absolute;opacity:0;pointer-events:none}
+.script{font-family:var(--script)}
+section{position:relative;z-index:2;max-width:1000px;margin:auto;padding:96px 22px;text-align:center}
+h2{font-family:var(--serif);font-weight:800;font-size:clamp(32px,6vw,52px);line-height:1.15;margin-bottom:10px}
+.lead{color:var(--muted);max-width:520px;margin:0 auto 44px}
+:focus-visible{outline:3px solid var(--gold);outline-offset:4px;border-radius:12px}
+
+/* Scroll-triggered reveal (modern browsers; content stays visible elsewhere) */
+@supports (animation-timeline:view()){
+  .rv{animation:rv linear both;animation-timeline:view();animation-range:entry 0% entry 55%}
+}
+@keyframes rv{from{opacity:0;transform:translateY(46px)}}
+
+/* Ambient stars */
+.stars{position:fixed;inset:0;z-index:0;pointer-events:none;animation:twinkle 4s ease-in-out infinite;
+  background:
+  radial-gradient(2px 2px at 8% 18%,#fff,transparent),radial-gradient(2px 2px at 27% 72%,#fff,transparent),
+  radial-gradient(3px 3px at 52% 12%,#fff,transparent),radial-gradient(2px 2px at 73% 58%,#fff,transparent),
+  radial-gradient(3px 3px at 91% 24%,#fff,transparent),radial-gradient(2px 2px at 18% 92%,#fff,transparent),
+  radial-gradient(2px 2px at 63% 88%,#fff,transparent),radial-gradient(3px 3px at 44% 46%,#fff,transparent),
+  radial-gradient(2px 2px at 86% 80%,#fff,transparent),radial-gradient(2px 2px at 36% 30%,#fff,transparent)}
+@keyframes twinkle{50%{opacity:.35}}
+
+/* =========================================================
+   4. GIFT GATE  (CSS-only, checkbox state)
+   ========================================================= */
+.gate{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+  padding:24px;text-align:center;cursor:pointer;background:radial-gradient(circle at 50% 40%,var(--plum),var(--night));
+  transition:opacity .9s,visibility .9s,transform .9s}
+.gift{position:relative;font-size:112px;line-height:1;animation:bob 1.8s ease-in-out infinite}
+.gift::before,.gift::after{content:"";position:absolute;inset:-18px;border-radius:50%;border:2px solid var(--rose);animation:ring 2.4s ease-out infinite}
+.gift::after{animation-delay:1.2s}
+.gate h3{font-family:var(--serif);font-size:clamp(26px,6vw,38px);color:var(--gold)}
+.gate p{color:var(--muted)}
+#open:checked ~ .gate{opacity:0;visibility:hidden;transform:scale(1.15)}
+#open:focus-visible ~ .gate{outline:3px solid var(--gold);outline-offset:-10px}
+@keyframes bob{50%{transform:translateY(-16px) rotate(4deg)}}
+@keyframes ring{from{transform:scale(.7);opacity:.9}to{transform:scale(1.7);opacity:0}}
+
+/* Balloons and confetti (start after the gift is opened) */
+.fx{position:fixed;inset:0;z-index:60;pointer-events:none;overflow:hidden;opacity:0}
+#open:checked ~ .fx{opacity:1;transition:opacity .6s .4s}
+.fx i{position:absolute;left:calc(var(--i) * 6.2% - 2%);--c:var(--rose)}
+.fx i:nth-child(5n+2){--c:var(--gold)}.fx i:nth-child(5n+3){--c:var(--mint)}
+.fx i:nth-child(5n+4){--c:var(--violet)}.fx i:nth-child(5n){--c:var(--sky)}
+.fx .b{bottom:-150px;width:54px;height:70px;border-radius:50% 50% 48% 48%;background:var(--c);opacity:.85;
+  animation:rise calc(9s + var(--i) * .5s) linear infinite;animation-delay:calc(var(--i) * -1.3s)}
+.fx .b::after{content:"";position:absolute;top:68px;left:26px;width:1px;height:56px;background:rgba(255,255,255,.5)}
+.fx .b::before{content:"";position:absolute;top:12px;left:11px;width:9px;height:18px;border-radius:50%;background:rgba(255,255,255,.4);transform:rotate(20deg)}
+.fx .c{top:-24px;width:9px;height:14px;background:var(--c);
+  animation:fall calc(4.5s + (var(--i) * .17s)) linear infinite;animation-delay:calc(var(--i) * -.6s)}
+@keyframes rise{to{transform:translate(36px,-135vh)}}
+@keyframes fall{to{transform:translateY(112vh) rotate(720deg)}}
+
+/* =========================================================
+   5. HERO
+   ========================================================= */
+#home{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(70px);opacity:.5;z-index:-1;animation:drift 12s ease-in-out infinite alternate}
+.orb.o1{width:340px;height:340px;background:var(--rose);top:8%;left:-6%}
+.orb.o2{width:300px;height:300px;background:var(--violet);bottom:6%;right:-6%;animation-delay:-4s}
+.orb.o3{width:220px;height:220px;background:var(--gold);top:46%;left:52%;opacity:.25;animation-delay:-8s}
+@keyframes drift{to{transform:translate(50px,-40px) scale(1.15)}}
+.hb{font-family:var(--script);font-size:clamp(26px,5vw,38px);color:var(--gold)}
+h1{display:flex;font-family:var(--serif);font-weight:800;font-size:clamp(64px,19vw,176px);line-height:1;letter-spacing:-.03em}
+h1 span{display:inline-block;opacity:0;transform:translateY(90px) rotate(-14deg) scale(.4);
+  background:linear-gradient(180deg,#fff 20%,var(--rose));-webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:pop .9s cubic-bezier(.2,1.6,.4,1) forwards, float 4s ease-in-out infinite}
+h1 span:nth-child(1){animation-delay:.3s,1.6s}h1 span:nth-child(2){animation-delay:.45s,1.9s}
+h1 span:nth-child(3){animation-delay:.6s,2.2s}h1 span:nth-child(4){animation-delay:.75s,2.5s}
+h1 span:nth-child(5){animation-delay:.9s,2.8s}h1 span:nth-child(6){animation-delay:1.05s,3.1s}
+@keyframes pop{to{opacity:1;transform:none}}
+@keyframes float{50%{transform:translateY(-8px)}}
+.type{font-family:var(--serif);font-style:italic;font-size:clamp(17px,4.4vw,26px);color:var(--muted);
+  white-space:nowrap;overflow:hidden;width:0;border-right:2px solid var(--gold);
+  animation:typing 2.6s steps(31) 1.7s forwards, caret .7s step-end 1.7s 6}
+@keyframes typing{to{width:31ch;border-color:transparent}}
+@keyframes caret{50%{border-color:transparent}}
+.date{margin-top:18px;display:inline-flex;align-items:center;gap:10px;padding:10px 22px;border-radius:99px;
+  background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.2);opacity:0;animation:fade 1s 4.4s forwards}
+.date b{font-family:var(--serif);font-size:22px;color:var(--gold)}
+@keyframes fade{to{opacity:1}}
+.scroll{position:absolute;bottom:26px;font-size:28px;color:var(--muted);animation:bob 1.8s ease-in-out infinite}
+
+/* =========================================================
+   6. QUALITIES MARQUEE
+   ========================================================= */
+.marquee{position:relative;z-index:2;overflow:hidden;padding:18px 0;background:rgba(255,255,255,.06);
+  border-block:1px solid rgba(255,255,255,.12);
+  mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.track{display:flex;width:max-content;animation:scrollx 28s linear infinite}
+.track span{font-family:var(--serif);font-style:italic;font-size:clamp(20px,4vw,30px);padding:0 26px;color:var(--gold);white-space:nowrap}
+.track span::after{content:"✦";margin-left:52px;color:var(--rose);font-style:normal}
+.marquee:hover .track{animation-play-state:paused}
+@keyframes scrollx{to{transform:translateX(-50%)}}
+
+/* =========================================================
+   7. FLIP CARDS
+   ========================================================= */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px}
+.card{display:block;height:220px;perspective:1000px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .8s cubic-bezier(.3,1.2,.4,1);transform-style:preserve-3d}
+.chk:checked + .card .in{transform:rotateY(180deg)}
+.chk:focus-visible + .card{outline:3px solid var(--gold);outline-offset:4px;border-radius:var(--radius)}
+.f,.k{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  padding:24px;border-radius:var(--radius);backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:var(--shadow)}
+.f{background:linear-gradient(135deg,var(--rose),var(--violet));color:var(--paper-ink);font-family:var(--serif);font-weight:600;font-size:22px}
+.f em{font-style:normal;font-size:46px}
+.f small{font-family:var(--sans);font-weight:500;font-size:13px;opacity:.7}
+.k{transform:rotateY(180deg);background:var(--paper);color:var(--paper-ink);font-family:var(--script);font-size:26px;line-height:1.25}
+
+/* =========================================================
+   8. TIMELINE
+   ========================================================= */
+.tl{list-style:none;position:relative;max-width:780px;margin:auto;padding:0}
+.tl::before{content:"";position:absolute;top:0;bottom:0;left:50%;width:2px;background:linear-gradient(var(--rose),var(--violet),transparent)}
+.tl li{position:relative;width:50%;padding:0 38px 44px 0;text-align:right}
+.tl li:nth-child(even){margin-left:50%;padding:0 0 44px 38px;text-align:left}
+.tl li::after{content:"";position:absolute;top:6px;right:-8px;width:16px;height:16px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 6px rgba(255,200,87,.25)}
+.tl li:nth-child(even)::after{right:auto;left:-8px}
+.tl h3{font-family:var(--serif);font-size:22px;color:var(--gold)}
+.tl p{color:var(--muted);font-size:15px}
+@media(max-width:700px){
+  .tl::before{left:11px}
+  .tl li,.tl li:nth-child(even){width:100%;margin:0;padding:0 0 34px 44px;text-align:left}
+  .tl li::after,.tl li:nth-child(even)::after{left:4px;right:auto}
+}
+
+/* =========================================================
+   9. PHOTO GALLERY + CSS-ONLY LIGHTBOX
+   Photos: photo1.jpg ... photo6.jpg in the same folder as this file
+   ========================================================= */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:34px 24px;padding:8px}
+.pol{display:block;padding:12px 12px 16px;background:#fff;color:var(--paper-ink);border-radius:6px;box-shadow:var(--shadow);transition:transform .45s cubic-bezier(.3,1.4,.5,1)}
+.pol:nth-child(odd){transform:rotate(-3deg)}.pol:nth-child(even){transform:rotate(3deg)}.pol:nth-child(3n){transform:rotate(-1.5deg)}
+.pol:hover,.pol:focus-visible{transform:rotate(0) scale(1.08) translateY(-8px);z-index:3}
+.ph,.big{position:relative;display:grid;place-items:center;font-size:36px;overflow:hidden;
+  background:repeating-linear-gradient(45deg,#f6e7ff,#f6e7ff 10px,#fbe1ea 10px,#fbe1ea 20px)}
+.ph{aspect-ratio:1}
+.ph::before,.big::before{content:"";position:absolute;inset:0;background:var(--img) center/cover no-repeat}
+.pol span{display:block;margin-top:8px;font-family:var(--script);font-size:26px}
+.lb{position:fixed;inset:0;z-index:90;display:none;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:24px;background:rgba(10,5,30,.92)}
+.lb:target{display:flex;animation:fadein .4s}
+.lb .bg{position:absolute;inset:0}
+.big{position:relative;width:min(88vw,620px);aspect-ratio:1;border:12px solid #fff;border-bottom-width:16px;border-radius:6px;box-shadow:var(--shadow)}
+.lb p{position:relative;font-family:var(--script);font-size:32px;color:var(--gold)}
+.x{position:absolute;top:18px;right:22px;z-index:2;font-size:30px;width:46px;height:46px;display:grid;place-items:center;border-radius:50%;background:rgba(255,255,255,.14)}
+@keyframes fadein{from{opacity:0}}
+
+/* =========================================================
+   10. BIRTHDAY CAKE
+   ========================================================= */
+.cake{position:relative;display:block;width:210px;height:200px;margin:46px auto 18px;cursor:pointer}
+.tier{position:absolute;left:50%;transform:translateX(-50%);border-radius:16px;box-shadow:inset 0 -8px 0 rgba(0,0,0,.12)}
+.t1{bottom:0;width:210px;height:64px;background:var(--rose)}
+.t2{bottom:64px;width:158px;height:54px;background:var(--gold)}
+.t3{bottom:118px;width:106px;height:44px;background:var(--mint)}
+.can{position:absolute;bottom:162px;left:50%;width:9px;height:32px;background:#fff;border-radius:3px;transform:translateX(-50%)}
+.flame{position:absolute;top:-24px;left:50%;width:15px;height:24px;margin-left:-7px;transform-origin:bottom;
+  background:radial-gradient(#fff 15%,#ffb703 60%,#ff5400);border-radius:50% 50% 50% 50%/70% 70% 30% 30%;
+  box-shadow:0 0 28px 10px rgba(255,183,3,.55);animation:flicker .3s ease-in-out infinite alternate}
+@keyframes flicker{to{transform:scale(1.15,.9) rotate(4deg)}}
+.chk:checked + .cake .flame{display:none}
+.chk:checked + .cake .can::after{content:"";position:absolute;top:-30px;left:1px;width:7px;height:28px;border-radius:50%;background:rgba(255,255,255,.45);filter:blur(3px);animation:smoke 2.4s forwards}
+@keyframes smoke{to{opacity:0;transform:translateY(-54px)}}
+.spark{position:absolute;top:-10px;left:50%;font-size:24px;opacity:0}
+.chk:checked + .cake .spark{animation:burst 1.6s ease-out forwards}
+@keyframes burst{from{opacity:1;transform:translate(0,0)}to{opacity:0;transform:translate(var(--x),var(--y)) rotate(200deg)}}
+.wishtext{min-height:76px;font-size:30px;color:var(--gold)}
+.wishtext .after{display:none}
+.chk:checked ~ .wishtext .before{display:none}
+.chk:checked ~ .wishtext .after{display:block;animation:fadein 1s}
+
+/* =========================================================
+   11. LETTER + FOOTER
+   ========================================================= */
+.letter{max-width:660px;margin:auto;padding:40px 32px;text-align:left;background:var(--paper);color:#3a1c58;border-radius:8px;
+  font-family:var(--script);font-size:28px;line-height:1.45;box-shadow:var(--shadow);transform:rotate(-.8deg);position:relative}
+.letter::before{content:"";position:absolute;top:-14px;left:50%;width:120px;height:28px;margin-left:-60px;background:rgba(255,200,87,.7);transform:rotate(-3deg)}
+.letter p+p{margin-top:14px}
+.sign{font-size:34px;color:#c2185b;margin-top:18px}
+footer{position:relative;z-index:2;text-align:center;padding:48px 20px 80px;color:var(--muted)}
+footer p{font-family:var(--script);font-size:28px}
+.closing{margin:36px auto 0;max-width:560px;padding:22px 24px;border-radius:var(--radius);background:rgba(255,255,255,.07);border:1px dashed rgba(255,200,87,.5)}
+.closing q{display:block;font-family:var(--serif);font-style:italic;font-size:clamp(18px,4vw,22px);line-height:1.5;color:var(--ink);quotes:none}
+.closing code{display:block;margin-top:10px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;color:var(--mint)}
+
+
+/* =========================================================
+   12. EXTRA ANIMATION LAYER
+   ========================================================= */
+h1{filter:drop-shadow(0 0 28px rgba(255,143,171,.45))}
+.progress{position:fixed;top:0;left:0;right:0;height:4px;z-index:120;transform-origin:left;transform:scaleX(0);background:linear-gradient(90deg,var(--rose),var(--gold),var(--mint))}
+@supports (animation-timeline:scroll()){.progress{animation:grow linear both;animation-timeline:scroll()}}
+@keyframes grow{to{transform:scaleX(1)}}
+.fl{position:absolute;bottom:-50px;left:calc(var(--i) * 15% - 5%);z-index:-1;font-size:clamp(22px,4vw,34px);opacity:.8;
+  animation:rise calc(8s + var(--i) * 1.2s) linear infinite;animation-delay:calc(var(--i) * -2s)}
+.marquee.rev{margin-top:0}.marquee.rev .track{animation-direction:reverse;animation-duration:36s}
+
+/* Animated counters */
+@property --n{syntax:'<integer>';initial-value:0;inherits:false}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px}
+.stat{padding:30px 18px;border-radius:var(--radius);background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);transition:transform .4s,background .4s}
+.stat:hover{transform:translateY(-8px);background:rgba(255,255,255,.12)}
+.num{display:block;font-family:var(--serif);font-weight:800;font-size:clamp(40px,8vw,58px);line-height:1.1;color:var(--gold);--n:var(--t);counter-reset:n var(--n)}
+.num::after{content:counter(n) var(--s,"")}
+.stat span{color:var(--muted);font-size:15px}
+@supports (animation-timeline:view()){.num{animation:count linear both;animation-timeline:view();animation-range:entry 10% cover 35%}}
+@keyframes count{from{--n:0}to{--n:var(--t)}}
+
+/* Music player */
+.player{max-width:520px;margin:auto;padding:26px;border-radius:var(--radius);background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);box-shadow:var(--shadow)}
+.eq{display:flex;justify-content:center;align-items:flex-end;gap:6px;height:56px;margin-bottom:18px}
+.eq i{width:9px;height:100%;border-radius:5px;background:linear-gradient(var(--rose),var(--violet));transform-origin:bottom;animation:eq 1s ease-in-out infinite alternate}
+.eq i:nth-child(2n){animation-duration:.7s}.eq i:nth-child(3n){animation-duration:1.3s;background:linear-gradient(var(--gold),var(--rose))}
+.eq i:nth-child(4n){animation-delay:-.4s}
+@keyframes eq{from{transform:scaleY(.15)}to{transform:scaleY(1)}}
+audio{width:100%;color-scheme:dark}
+.note{margin-top:12px;font-size:13px;color:var(--muted)}
+
+/* Open when... */
+.ow{max-width:680px;margin:auto;display:grid;gap:14px;text-align:left}
+.ow summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:18px 22px;border-radius:var(--radius);
+  background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.18);font-family:var(--serif);font-weight:600;font-size:19px;transition:.3s}
+.ow summary::-webkit-details-marker{display:none}
+.ow summary:hover{background:rgba(255,255,255,.15)}
+.ow summary::after{content:"+";font-size:28px;color:var(--gold);transition:transform .4s}
+.ow details[open] summary{background:linear-gradient(135deg,var(--rose),var(--violet));color:var(--paper-ink)}
+.ow details[open] summary::after{transform:rotate(135deg);color:var(--paper-ink)}
+.ow details p{margin-top:12px;padding:20px 24px;border-radius:var(--radius);background:var(--paper);color:var(--paper-ink);font-family:var(--script);font-size:27px;line-height:1.3;animation:fadein .6s}
+
+/* Coupons */
+.coupons{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;text-align:left}
+.coupon{display:flex;align-items:center;gap:18px;padding:22px 26px;color:var(--paper-ink);background:linear-gradient(135deg,var(--gold),var(--rose));transition:transform .4s;
+  -webkit-mask:radial-gradient(circle 13px at 0 50%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 13px at 100% 50%,#0000 98%,#000) right/51% 100% no-repeat;
+  mask:radial-gradient(circle 13px at 0 50%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 13px at 100% 50%,#0000 98%,#000) right/51% 100% no-repeat}
+.coupon:hover{transform:scale(1.04) rotate(-1deg)}
+.coupon b{font-family:var(--serif);font-size:30px;line-height:1;padding-right:18px;border-right:2px dashed rgba(42,15,71,.45)}
+.coupon h3{font-family:var(--serif);font-size:19px}
+.coupon p{font-size:13.5px;opacity:.85;line-height:1.4}
+.coupon:nth-child(2){background:linear-gradient(135deg,var(--mint),var(--sky))}
+.coupon:nth-child(3){background:linear-gradient(135deg,var(--violet),var(--rose))}
+.coupon:nth-child(4){background:linear-gradient(135deg,var(--sky),var(--violet))}
+
+/* Wishes carousel */
+.slider{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:10px 4px 26px;scrollbar-width:thin;scrollbar-color:var(--rose) transparent;text-align:left}
+.slide{flex:0 0 min(86%,370px);scroll-snap-align:center;padding:28px;border-radius:var(--radius);background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.18);transition:transform .4s}
+.slide:hover{transform:translateY(-6px)}
+.slide .av{display:grid;place-items:center;width:54px;height:54px;border-radius:50%;font-size:28px;background:linear-gradient(135deg,var(--rose),var(--violet));margin-bottom:14px}
+.slide p{font-family:var(--serif);font-style:italic;line-height:1.55}
+.slide h4{margin-top:14px;font-family:var(--script);font-size:26px;color:var(--gold)}
+
+/* Grand finale */
+#finale{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden}
+#finale>*:not(.fw){position:relative;z-index:1}
+.neon{font-family:var(--serif);font-weight:800;font-size:clamp(42px,11vw,104px);line-height:1.05;color:#fff;animation:glow 2.4s ease-in-out infinite alternate;
+  text-shadow:0 0 12px var(--rose),0 0 34px var(--rose),0 0 70px var(--violet)}
+@keyframes glow{to{text-shadow:0 0 6px #fff,0 0 22px var(--gold),0 0 60px var(--gold),0 0 100px var(--rose)}}
+.fw{position:absolute;left:var(--x);top:var(--y);width:180px;height:180px;margin:-90px 0 0 -90px;border-radius:50%;opacity:0;
+  background:repeating-conic-gradient(var(--c) 0 5deg,transparent 5deg 18deg);
+  -webkit-mask:radial-gradient(circle,transparent 26%,#000 28%,#000 60%,transparent 66%);mask:radial-gradient(circle,transparent 26%,#000 28%,#000 60%,transparent 66%);
+  animation:fw 2.8s ease-out infinite;animation-delay:var(--d)}
+@keyframes fw{0%{transform:scale(.1);opacity:1}70%{opacity:.9}100%{transform:scale(1.6);opacity:0}}
+
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01s!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.01s!important}}
+</style>
+</head>
+<body>
+
+<div class="stars" aria-hidden="true"></div>
+<div class="progress" aria-hidden="true"></div>
+
+<!-- Gift gate: click to open -->
+<input type="checkbox" id="open" class="chk" aria-label="Open your gift">
+<label for="open" class="gate">
+  <span class="gift" aria-hidden="true">🎁</span>
+  <h3>A little surprise for Khushi</h3>
+  <p>Tap the gift to open it ✨</p>
+</label>
+
+<!-- Balloons and confetti -->
+<div class="fx" aria-hidden="true">
+  <i class="b" style="--i:1"></i><i class="b" style="--i:3"></i><i class="b" style="--i:5"></i><i class="b" style="--i:7"></i>
+  <i class="b" style="--i:9"></i><i class="b" style="--i:11"></i><i class="b" style="--i:13"></i><i class="b" style="--i:15"></i>
+  <i class="c" style="--i:1"></i><i class="c" style="--i:2"></i><i class="c" style="--i:3"></i><i class="c" style="--i:4"></i>
+  <i class="c" style="--i:5"></i><i class="c" style="--i:6"></i><i class="c" style="--i:7"></i><i class="c" style="--i:8"></i>
+  <i class="c" style="--i:9"></i><i class="c" style="--i:10"></i><i class="c" style="--i:11"></i><i class="c" style="--i:12"></i>
+  <i class="c" style="--i:13"></i><i class="c" style="--i:14"></i><i class="c" style="--i:15"></i><i class="c" style="--i:16"></i>
+</div>
+
+<main>
+  <!-- HERO -->
+  <section id="home">
+    <span class="fl" style="--i:1" aria-hidden="true">🎈</span><span class="fl" style="--i:2" aria-hidden="true">✨</span><span class="fl" style="--i:3" aria-hidden="true">🎂</span><span class="fl" style="--i:4" aria-hidden="true">💖</span><span class="fl" style="--i:5" aria-hidden="true">🎁</span><span class="fl" style="--i:6" aria-hidden="true">🌟</span>
+    <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+    <p class="hb">🎉 Happy Birthday 🎉</p>
+    <h1 aria-label="Khushi"><span>K</span><span>h</span><span>u</span><span>s</span><span>h</span><span>i</span></h1>
+    <p class="type">Today the world celebrates you.</p>
+    <div class="date"><span aria-hidden="true">🎂</span><b>October 5</b></div>
+    <div class="scroll" aria-hidden="true">⌄</div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee" aria-hidden="true">
+    <div class="track">
+      <span>Kind</span><span>Fearless</span><span>Hilarious</span><span>Loyal</span><span>Brilliant</span><span>Radiant</span><span>Irreplaceable</span><span>Genuine</span>
+      <span>Kind</span><span>Fearless</span><span>Hilarious</span><span>Loyal</span><span>Brilliant</span><span>Radiant</span><span>Irreplaceable</span><span>Genuine</span>
+    </div>
+  </div>
+
+  <!-- REASONS -->
+  <section id="qualities">
+    <div class="rv">
+      <h2>Six things I love about you</h2>
+      <p class="lead">Tap any card to read what's on the other side.</p>
+    </div>
+    <div class="cards rv">
+      <div><input type="checkbox" id="c1" class="chk" aria-label="Reveal: Your smile"><label for="c1" class="card"><div class="in"><div class="f"><em>😊</em>Your smile<small>tap to flip</small></div><div class="k">Your smile can turn the worst day around. Never let anything dim it.</div></div></label></div>
+      <div><input type="checkbox" id="c2" class="chk" aria-label="Reveal: Your friendship"><label for="c2" class="card"><div class="in"><div class="f"><em>🤝</em>Your friendship<small>tap to flip</small></div><div class="k">A true friend understands without words. You have always done exactly that.</div></div></label></div>
+      <div><input type="checkbox" id="c3" class="chk" aria-label="Reveal: Your dreams"><label for="c3" class="card"><div class="in"><div class="f"><em>🌟</em>Your dreams<small>tap to flip</small></div><div class="k">Every dream you're chasing is within reach. Trust yourself, always.</div></div></label></div>
+      <div><input type="checkbox" id="c4" class="chk" aria-label="Reveal: Your name"><label for="c4" class="card"><div class="in"><div class="f"><em>🌸</em>Your name<small>tap to flip</small></div><div class="k">Your name means happiness, and you live up to it every single day.</div></div></label></div>
+      <div><input type="checkbox" id="c5" class="chk" aria-label="Reveal: Your year ahead"><label for="c5" class="card"><div class="in"><div class="f"><em>🎈</em>Your year ahead<small>tap to flip</small></div><div class="k">May this year bring you as many joys as there are stars in the sky.</div></div></label></div>
+      <div><input type="checkbox" id="c6" class="chk" aria-label="Reveal: Thank you"><label for="c6" class="card"><div class="in"><div class="f"><em>💖</em>Thank you<small>tap to flip</small></div><div class="k">Thank you for standing by me through everything. You mean the world.</div></div></label></div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section id="stats">
+    <div class="rv"><h2>Our friendship by the numbers</h2><p class="lead">Totally scientific. Completely accurate.</p></div>
+    <div class="stats rv">
+      <div class="stat"><b class="num" style="--t:10000;--s:'+'"></b><span>messages exchanged</span></div>
+      <div class="stat"><b class="num" style="--t:500;--s:'+'"></b><span>inside jokes nobody else gets</span></div>
+      <div class="stat"><b class="num" style="--t:365"></b><span>days a year you make me smile</span></div>
+      <div class="stat"><b class="num" style="--t:1"></b><span>best friend like you</span></div>
+    </div>
+  </section>
+
+  <!-- TIMELINE (edit these milestones to match your real story) -->
+  <section id="journey">
+    <div class="rv">
+      <h2>Our journey so far</h2>
+      <p class="lead">A few chapters of a story I'm so glad we share.</p>
+    </div>
+    <ol class="tl rv">
+      <li><h3>The day we met</h3><p>Who knew a simple hello would become the best friendship of my life.</p></li>
+      <li><h3>Late-night talks & inside jokes</h3><p>Endless chats, silly fights over nothing, and laughing until it hurt. Somewhere along the way, those little moments became my favourite memories.</p></li>
+      <li><h3>Through thick and thin</h3><p>Every tough day was easier because you were there.</p></li>
+      <li><h3>Today, and always</h3><p>Another year older, and my favourite person is still by my side.</p></li>
+    </ol>
+  </section>
+
+  <!-- PHOTOS: add photo1.jpg to photo6.jpg beside this file -->
+  <section id="memories">
+    <div class="rv">
+      <h2>Memories we made 📸</h2>
+      <p class="lead">Moments that stay with me. Tap a photo to view it larger.</p>
+    </div>
+    <div class="grid rv">
+      <a class="pol" href="#p1"><div class="ph" style="--img:url(photo1.jpg)">📷</div><span>Our first trip</span></a>
+      <a class="pol" href="#p2"><div class="ph" style="--img:url(photo2.jpg)">📷</div><span>Pure fun</span></a>
+      <a class="pol" href="#p3"><div class="ph" style="--img:url(photo3.jpg)">📷</div><span>Best selfie ever</span></a>
+      <a class="pol" href="#p4"><div class="ph" style="--img:url(photo4.jpg)">📷</div><span>One crazy day</span></a>
+      <a class="pol" href="#p5"><div class="ph" style="--img:url(photo5.jpg)">📷</div><span>Unforgettable</span></a>
+      <a class="pol" href="#p6"><div class="ph" style="--img:url(photo6.jpg)">📷</div><span>You and me</span></a>
+    </div>
+  </section>
+
+  <!-- SONG: place your favourite song next to this file as song.mp3 -->
+  <section id="song">
+    <div class="rv"><h2>Our song 🎵</h2><p class="lead">Press play and let the memories flow.</p></div>
+    <div class="player rv">
+      <div class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <audio controls preload="none" src="song.mp3">Your browser does not support audio.</audio>
+      <p class="note">Add your song as <b>song.mp3</b> in the same folder.</p>
+    </div>
+  </section>
+
+  <!-- CAKE -->
+  <section id="wish">
+    <div class="rv">
+      <h2>Make a wish 🕯️</h2>
+      <p class="lead">Close your eyes, think of something wonderful, then tap the candle.</p>
+    </div>
+    <input type="checkbox" id="cd" class="chk" aria-label="Blow out the candle">
+    <label for="cd" class="cake">
+      <span class="spark" style="--x:-90px;--y:-90px">✨</span><span class="spark" style="--x:90px;--y:-100px">🎉</span>
+      <span class="spark" style="--x:-140px;--y:-30px">⭐</span><span class="spark" style="--x:140px;--y:-40px">💖</span>
+      <span class="spark" style="--x:-40px;--y:-140px">🎊</span><span class="spark" style="--x:50px;--y:-150px">🌟</span>
+      <div class="tier t1"></div><div class="tier t2"></div><div class="tier t3"></div>
+      <div class="can"><div class="flame"></div></div>
+    </label>
+    <div class="wishtext script" aria-live="polite">
+      <span class="before">🤞 Waiting for your wish…</span>
+      <span class="after">May every wish you just made come true! ✨</span>
+    </div>
+  </section>
+
+  <!-- OPEN WHEN -->
+  <section id="openwhen">
+    <div class="rv"><h2>Open when… 💌</h2><p class="lead">Little notes for every kind of day.</p></div>
+    <div class="ow rv">
+      <details><summary>Open when you feel sad 💙</summary><p>It's okay to have a heavy day. Breathe, drink some water, and remember that you are loved more than you know. I'm only a call away.</p></details>
+      <details><summary>Open when you doubt yourself 💪</summary><p>You are far stronger and more capable than you believe. Look how much you've already overcome. You've got this, always.</p></details>
+      <details><summary>Open when you miss me 🤗</summary><p>Distance never changes a real friendship. Just think of our silliest memory and know I'm laughing at the same moment.</p></details>
+      <details><summary>Open when you need a laugh 😂</summary><p>Remember that time we couldn't stop laughing over nothing at all? Yeah, that one. Now go and make a new one.</p></details>
+    </div>
+  </section>
+
+  <!-- COUPONS -->
+  <section id="coupons">
+    <div class="rv"><h2>Birthday coupons 🎟️</h2><p class="lead">Valid for the whole year. No expiry, no excuses.</p></div>
+    <div class="coupons rv">
+      <div class="coupon"><b>FREE</b><div><h3>Movie night</h3><p>Pick any film, any snack. I won't complain once.</p></div></div>
+      <div class="coupon"><b>1×</b><div><h3>Treat on me</h3><p>Your favourite food, my wallet. Redeem anytime.</p></div></div>
+      <div class="coupon"><b>24h</b><div><h3>Rant hotline</h3><p>I'll listen to everything, any time of day or night.</p></div></div>
+      <div class="coupon"><b>∞</b><div><h3>Hugs</h3><p>Unlimited and non-transferable. Just ask.</p></div></div>
+    </div>
+  </section>
+
+  <!-- WISHES CAROUSEL -->
+  <section id="wishes">
+    <div class="rv"><h2>Wishes just for you 🌈</h2><p class="lead">Swipe or scroll sideways to read them all.</p></div>
+    <div class="slider rv" tabindex="0" aria-label="Birthday wishes">
+        <article class="slide"><div class="av">🧑‍🤝‍🧑</div><p>You are the one person who makes the hard days lighter and the good days better. I'm so grateful to have you in my life, and I'll always be right here for you, no matter what.</p><h4>— Your Best Friend</h4></article>
+      <article class="slide"><div class="av">🌍</div><p>May this year be gentle with you, generous to you, and full of reasons to celebrate every single day.</p><h4>— The Universe</h4></article>
+      <article class="slide"><div class="av">🚀</div><p>Keep going. Everything you're working towards is closer than it feels, and it's going to be worth it.</p><h4>— Future You</h4></article>
+      <article class="slide"><div class="av">🎂</div><p>Eat the cake, make the wish, and dance like nobody is watching. Today is entirely yours.</p><h4>— The Birthday Fairy</h4></article>
+    </div>
+  </section>
+
+  <!-- LETTER -->
+  <section id="letter">
+    <div class="rv">
+      <h2>A letter for you 💌</h2>
+      <p class="lead">Written from the heart.</p>
+    </div>
+    <article class="letter rv">
+      <p>Dear Khushi,</p>
+      <p>Finding a friend like you is a rare kind of luck. Your laughter is my favourite sound, and your support is my greatest strength.</p>
+      <p>I hope this year brings you everything your heart has been wishing for. Keep smiling, because your smile lights up every room you walk into.</p>
+      <p>Happy Birthday, my dear friend! 🤗</p>
+      <p class="sign">Your friend, always ❤️</p>
+    </article>
+  </section>
+
+  <!-- GRAND FINALE -->
+  <div class="marquee rev" aria-hidden="true"><div class="track">
+    <span>Happy Birthday Khushi</span><span>Make a wish</span><span>Celebrate big</span><span>Shine on</span><span>Happy Birthday Khushi</span><span>Make a wish</span><span>Celebrate big</span><span>Shine on</span>
+    <span>Happy Birthday Khushi</span><span>Make a wish</span><span>Celebrate big</span><span>Shine on</span><span>Happy Birthday Khushi</span><span>Make a wish</span><span>Celebrate big</span><span>Shine on</span>
+  </div></div>
+  <section id="finale">
+    <div class="rain" aria-hidden="true">
+      <i style="--i:1">💖</i><i style="--i:2">✨</i><i style="--i:3">🌸</i><i style="--i:4">⭐</i><i style="--i:5">💖</i>
+      <i style="--i:6">✨</i><i style="--i:7">🌸</i><i style="--i:8">⭐</i><i style="--i:9">💖</i><i style="--i:10">✨</i><i style="--i:11">🌸</i>
+    </div>
+    <div class="heart" aria-hidden="true">💖</div>
+    <p class="hb">With all my love</p>
+    <h2 class="fin">Happy Birthday,<br><em>Betu!</em></h2>
+    <p class="fin-msg">Thank you for every laugh, every secret and every little moment in between. May this year bring you endless happiness, success beyond your dreams, and everything your heart truly wishes for. No matter where life takes us, I'll always be right here, cheering for you.</p>
+    <p class="fin-sign">Forever your friend ❤️</p>
+  </section>
+</main>
+
+<!-- LIGHTBOXES (CSS :target) -->
+<div class="lb" id="p1">
+  <a class="bg" href="#memories" aria-label="Close"></a>
+  <a class="x" href="#memories" aria-label="Close">✕</a>
+  <div class="big" style="--img:url(photo1.jpg)"></div>
+  <p>Our first trip</p>
+</div>
+<div class="lb" id="p2">
+  <a class="bg" href="#memories" aria-label="Close"></a>
+  <a class="x" href="#memories" aria-label="Close">✕</a>
+  <div class="big" style="--img:url(photo2.jpg)"></div>
+  <p>Pure fun</p>
+</div>
+<div class="lb" id="p3">
+  <a class="bg" href="#memories" aria-label="Close"></a>
+  <a class="x" href="#memories" aria-label="Close">✕</a>
+  <div class="big" style="--img:url(photo3.jpg)"></div>
+  <p>Best selfie ever</p>
+</div>
+<div class="lb" id="p4">
+  <a class="bg" href="#memories" aria-label="Close"></a>
+  <a class="x" href="#memories" aria-label="Close">✕</a>
+  <div class="big" style="--img:url(photo4.jpg)"></div>
+  <p>One crazy day</p>
+</div>
+<div class="lb" id="p5">
+  <a class="bg" href="#memories" aria-label="Close"></a>
+  <a class="x" href="#memories" aria-label="Close">✕</a>
+  <div class="big" style="--img:url(photo5.jpg)"></div>
+  <p>Unforgettable</p>
+</div>
+<div class="lb" id="p6">
+  <a class="bg" href="#memories" aria-label="Close"></a>
+  <a class="x" href="#memories" aria-label="Close">✕</a>
+  <div class="big" style="--img:url(photo6.jpg)"></div>
+  <p>You and me</p>
+</div>
+
+<footer>
+  <p>Made with ❤️ for My Butki </p>
+  <div class="closing">
+    <q>If you're a developer and you haven't built something like this for your best friend, then what's the point of being a developer?</q>
+    <code>// built with love, not just code 💻❤️</code>
+  </div>
+</footer>
+</body>
+</html>
