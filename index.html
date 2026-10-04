@@ -409,15 +409,7 @@ h1{filter:drop-shadow(0 0 28px rgba(255,143,171,.45))}
 @supports (animation-timeline:view()){.num{animation:count linear both;animation-timeline:view();animation-range:entry 10% cover 35%}}
 @keyframes count{from{--n:0}to{--n:var(--t)}}
 
-/* Music player */
-.player{max-width:520px;margin:auto;padding:26px;border-radius:var(--radius);background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);box-shadow:var(--shadow)}
-.eq{display:flex;justify-content:center;align-items:flex-end;gap:6px;height:56px;margin-bottom:18px}
-.eq i{width:9px;height:100%;border-radius:5px;background:linear-gradient(var(--rose),var(--violet));transform-origin:bottom;animation:eq 1s ease-in-out infinite alternate}
-.eq i:nth-child(2n){animation-duration:.7s}.eq i:nth-child(3n){animation-duration:1.3s;background:linear-gradient(var(--gold),var(--rose))}
-.eq i:nth-child(4n){animation-delay:-.4s}
-@keyframes eq{from{transform:scaleY(.15)}to{transform:scaleY(1)}}
-audio{width:100%;color-scheme:dark}
-.note{margin-top:12px;font-size:13px;color:var(--muted)}
+
 
 /* Open when... */
 .ow{max-width:680px;margin:auto;display:grid;gap:14px;text-align:left}
@@ -593,15 +585,6 @@ audio{width:100%;color-scheme:dark}
     </div>
   </section>
 
-  <!-- SONG: place your favourite song next to this file as song.mp3 -->
-  <section id="song">
-    <div class="rv"><h2>Our song 🎵</h2><p class="lead">Press play and let the memories flow.</p></div>
-    <div class="player rv">
-      <div class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-      <audio controls preload="none" src="song.mp3">Your browser does not support audio.</audio>
-      <p class="note">Add your song as <b>song.mp3</b> in the same folder.</p>
-    </div>
-  </section>
 
   <!-- CAKE -->
   <section id="wish">
